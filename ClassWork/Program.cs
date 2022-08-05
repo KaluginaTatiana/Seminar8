@@ -46,7 +46,10 @@ void ChangeRowsColumns(int[,] array)
     }
     Console.WriteLine();
 }
+void MinElement()
+{
 
+}
 void Task53()
 {
     // Задайте двумерный массив. Напишите программу, которая поменяет местами 
@@ -82,6 +85,75 @@ void Task55()
     Console.WriteLine();
     ChangeRowsColumns(matrix);
 }
+void Task57()
+{
+    // Составить частотный словарь элементов двумерного массива. Частотный словарь содержит
+    //информацию о том, сколько раз встречается элемент входных данных.
+    Random rand = new Random();
+    int rows = rand.Next(2, 5);
+    int columns = rand.Next(3, 5);
+    int[,] matrix = new int[rows, columns];
+    int[] dictionary = new int[10];
+    FillArray(matrix);
+    PrintArray(matrix);
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < columns; j++)
+        {
+            dictionary[matrix[i, j]]++;
+        }
+    }
+    Console.WriteLine();
+    for (int i = 0; i < dictionary.Length; i++)
+    {
+        if (dictionary[i] != 0) Console.WriteLine($"Элемент {i} встречается {dictionary[i]} раз.");
+    }
 
+}
+void Task59()
+{
+    //Задайтедвумерный массив из целых чисел. Напишите программу, 
+    // которая удалит строку и столбец, на пересечении которых
+    // расположен наименьший элемент массива.
+    Random rand = new Random();
+    int rows = rand.Next(2, 6);
+    int columns = rand.Next(3, 6);
+    int[,] matrix = new int[rows, columns];
+    FillArray(matrix);
+    PrintArray(matrix);
+    Console.WriteLine();
+    int min = matrix[0, 0];
+    int iMin = 0;
+    int jMin = 0;
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < columns; j++)
+        {
+            if (matrix[i, j] < min) 
+            {
+                min = matrix[i, j];
+                iMin = i;
+                jMin = j;
+            };
+        }
+    }
+    Console.WriteLine($"Минимальный элемент находится на позиции ({iMin}, {jMin}) и равен {min}.");
+    int[,] newMatrix = new int[rows -1, columns - 1];
+    int iBias = 0;
+    for (int i = 0; i < rows - 1; i++)
+    {
+        if (i == iMin) iBias++;
+        int jBias = 0;
+        for (int j = 0; j < columns - 1; j++)
+        {
+            if (j == jMin) jBias++;
+            newMatrix[i, j] = matrix[i + iBias, j + jBias];
+        }
+    }
+    Console.WriteLine("Вывод нового массива:");
+    PrintArray(newMatrix);
+}    
 //Task53();
-Task55();
+//Task55();
+//Task57();
+Task59();
