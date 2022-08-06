@@ -149,8 +149,80 @@ void Task59()
     }
     Console.WriteLine("Вывод нового массива:");
     PrintArray(newMatrix);
-}    
+}
+
+void Task54()
+{
+    // Это разбор домашнего задания с использованием сортировки пузырьком.
+    // Задайте двумерный массив. Напишите программу, которая упорядочит 
+    // по убыванию элементы каждой строки двумерного массива.
+
+    Random rand = new Random();
+    int rows = rand.Next(2, 6);
+    int columns = rand.Next(3, 6);
+    int[,] matrix = new int[rows, columns];
+    FillArray(matrix);
+    PrintArray(matrix);
+    Console.WriteLine();
+
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < columns; j++)
+        {
+            for (int k = 0; k < columns - j - 1; k++)
+            {
+                if (matrix[i, k] < matrix[i, k + 1])
+                {
+                    int temp = matrix[i, k];
+                    matrix[i, k] = matrix[i, k + 1];
+                    matrix[i, k + 1] = temp;
+                }
+            }
+        }
+    }
+    PrintArray(matrix);
+}
+
+void Task58()
+{
+    // Это разбор домашнего задания.
+    // Заполните спирально массив 4 на 4.
+    Random rand = new Random();
+    int rows = rand.Next(4, 8);
+    int columns = rand.Next(3, 7);
+    int[,] matrix = new int[rows, columns];
+    
+    int indexI = 0;
+    int indexJ = 0;
+
+    int changeI = 0;
+    int changeJ = 1;
+
+    int steps = columns;
+    int turnCount = 0;
+    
+    for (int i = 1; i <= matrix.Length; i++)
+    {
+        matrix[indexI, indexJ] = i;
+        steps = steps - 1;
+        if (steps == 0)
+        {
+            steps = columns * (turnCount % 2) + rows * ((turnCount + 1) % 2) - 1 - turnCount/2;
+            int temp = changeI;
+            changeI = changeJ;
+            changeJ = -temp;
+            turnCount= turnCount + 1;
+        }
+
+        indexI = indexI + changeI;
+        indexJ = indexJ + changeJ;
+    }
+    PrintArray(matrix);
+}
+
 //Task53();
 //Task55();
 //Task57();
-Task59();
+//Task59();
+//Task54();
+Task58();
