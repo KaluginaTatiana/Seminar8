@@ -46,10 +46,7 @@ void ChangeRowsColumns(int[,] array)
     }
     Console.WriteLine();
 }
-void MinElement()
-{
 
-}
 void Task53()
 {
     // Задайте двумерный массив. Напишите программу, которая поменяет местами 

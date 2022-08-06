@@ -50,8 +50,43 @@ void FillArrayRow(int[] arrayRow, int[,] array, int iNum)
     }
 }
 
+void FillArraySqrSpiral(int[,] array)
+{
+    int rows = array.GetLength(0);
+    int min = 0;
+    int max = rows - 1;
+    int num = 1;
+    while (num <= array.Length)
+    {
+        for (int j = min; j <= max; j++)
+        {
+            array[min, j] = num;
+            num = num + 1;
+        }
+        for (int i = min + 1; i <= max; i++)
+        {
+            array[i, max] = num;
+            num = num + 1;
+        }
+        for (int j = max - 1; j >= min; j--)
+        {
+            array[max, j] = num;
+            num = num + 1;
+        }
+        for (int i = max - 1; i > min; i--)
+        {
+            array[i, min] = num;
+            num = num + 1;
+        }
+        min = min + 1;
+        max = max - 1;
+    }
+}
+
 void Task54()
 {
+    // Задайте двумерный массив. Напишите программу, которая упорядочит 
+    // по убыванию элементы каждой строки двумерного массива.
     Random rand = new Random();
     int rows = rand.Next(2, 6);
     int columns = rand.Next(3, 6);
@@ -74,6 +109,8 @@ void Task54()
 
 void Task56()
 {
+    // Задайте прямоугольный двумерный массив. Напишите программу, которая будет 
+    // находить строку с наименьшей суммой элементов.
     Random rand = new Random();
     int rows = rand.Next(2, 5);
     int columns = rand.Next(3, 5);
@@ -84,12 +121,9 @@ void Task56()
     int rowSumm = 0;
     int minSumm = 0;
     int iMin = 0;
-    for (int i = 0; i < 1; i++)
+    for (int k = 0; k < columns; k++)
     {
-        for (int j = 0; j < columns; j++)
-        {
-            minSumm = minSumm + matrix[i, j];
-        }
+        minSumm = minSumm + matrix[0, k];
     }
     for (int i = 1; i < rows; i++)
     {
@@ -105,5 +139,16 @@ void Task56()
     }
     Console.WriteLine($"Строка с наименьшей суммой элементов: {iMin + 1} строка.");
 }
-// Task54();
+
+void Task58()
+{
+    // Заполните спирально массив 4 на 4. 
+    int rows = 4;
+    int columns = 4;
+    int[,] matrix = new int[rows, columns];
+    FillArraySqrSpiral(matrix);
+    PrintArray(matrix);
+}
+Task54();
 Task56();
+Task58();
